@@ -35,4 +35,3 @@ The project includes the following files and directories:
 
 **Note:** This README provides a summary of the project requirements and guidelines. For more detailed instructions, refer to the original project document or subject materials provided by 42 code school.
 
-Feel free to modify this README according to your specific implementation and project details. Good luck with your project!
