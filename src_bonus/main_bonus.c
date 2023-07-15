@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 21:02:18 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/14 21:11:59 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/15 16:16:39 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 static void	check_get_grid(t_game *game, char *file)
 {
@@ -69,7 +69,10 @@ static void	so_long(char *file)
 
 	ft_bzero(&game, sizeof(t_game));
 	create_map(&game, file);
-	exit_error(&game, "Map is valid.");
+	init_game(&game);
+	while (game.map.rows--)
+		ft_printf("%s\n", game.map.grid[game.map.rows]);
+	exit_game(&game, "\nGame closed.");
 }
 
 static void	check_filename(char *file)
@@ -87,6 +90,7 @@ int	main(int ac, char **av)
 {
 	if (ac != 2)
 		exit_error(NULL, "Usage: ./so_long <map_name>.ber");
+	srand(time(NULL));
 	check_filename(av[1]);
 	so_long(av[1]);
 }

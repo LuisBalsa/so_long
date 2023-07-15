@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   init_game_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/10 21:06:37 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/14 17:24:35 by luide-so         ###   ########.fr       */
+/*   Created: 2023/07/15 14:24:21 by luide-so          #+#    #+#             */
+/*   Updated: 2023/07/15 16:48:18 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
-int	exit_error(t_game *game, char *msg)
+static void	init_mlx(t_game *game)
 {
-	if (game)
-	{
-		if (game->map.grid)
-			ft_free_array(game->map.grid);
-		if (game->mlx && game->win)
-			mlx_destroy_window(game->mlx, game->win);
-		if (game->mlx)
-			free(game->mlx);
-	}
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(msg, 2);
-	exit (EXIT_FAILURE);
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		exit_error(game, "Couldn't initialize mlx.");
+	game->win = mlx_new_window(game->mlx, game->map.cols * TILE_SIZE,
+			game->map.rows * TILE_SIZE, "so_long");
+	if (!game->win)
+		exit_error(game, "Couldn't create window.");
+}
+
+void	init_game(t_game *game)
+{
+	init_enemy(game);
+	init_mlx(game);
 }

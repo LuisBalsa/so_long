@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 21:03:17 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/14 20:00:39 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/15 16:34:26 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "../mlx/mlx.h"
 # include "../Libft/libft.h"
 # include <fcntl.h>
+# include <time.h>
 
 # define TILE_SIZE 32
 # define SP_LEN 8
 # define TILLES "01CEP"
+# define SPACES_PER_ENEMY 10
 
 typedef enum e_key
 {
@@ -74,11 +76,11 @@ typedef struct s_img
 typedef struct s_dummies
 {
 	t_point	current;
+	char	current_tile;
 	t_point	next;
-	t_img	img[SP_LEN];
 	int		img_index;
 	int		collect;
-	int		moves;
+	int		move;
 }				t_dummies;
 
 typedef struct s_game
@@ -87,11 +89,14 @@ typedef struct s_game
 	void		*win;
 	t_map		map;
 	t_dummies	player;
+	t_img		img_p[SP_LEN];
 	t_dummies	*enemy;
+	t_img		img_e[SP_LEN];
 	int			player_count;
 	int			enemy_count;
 	int			exit;
 	int			collect;
+	int			spaces;
 	t_img		img_walls;
 	t_img		img_space;
 	t_img		img_exit;
@@ -99,6 +104,9 @@ typedef struct s_game
 }				t_game;
 
 int		exit_error(t_game *game, char *msg);
+int		exit_game(t_game *game, char *msg);
 void	check_map(t_game *game);
+void	init_game(t_game *game);
+void	init_enemy(t_game *game);
 
 #endif
