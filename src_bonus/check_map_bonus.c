@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 14:48:30 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/15 14:09:27 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/16 01:07:15 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static void	check_characters(t_game *game)
 				game->player_count++;
 				game->player.current = (t_point){j, i};
 				game->player.next = (t_point){j, i};
+				ft_printf("Player position check map: %d, %d\n",
+					game->player.current.x, game->player.current.y);
 			}
 			else if (game->map.grid[i][j] == EXIT)
 				game->exit++;

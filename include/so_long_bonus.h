@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 21:03:17 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/15 16:34:26 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/16 01:32:16 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 # include <time.h>
 
 # define TILE_SIZE 32
-# define SP_LEN 8
+# define SP_LEN 2
+# define SP_ANIM 4
 # define TILLES "01CEP"
-# define SPACES_PER_ENEMY 10
+# define SPACES_PER_ENEMY 100
 
 typedef enum e_key
 {
@@ -80,7 +81,6 @@ typedef struct s_dummies
 	t_point	next;
 	int		img_index;
 	int		collect;
-	int		move;
 }				t_dummies;
 
 typedef struct s_game
@@ -89,6 +89,7 @@ typedef struct s_game
 	void		*win;
 	t_map		map;
 	t_dummies	player;
+	int			moves;
 	t_img		img_p[SP_LEN];
 	t_dummies	*enemy;
 	t_img		img_e[SP_LEN];
@@ -100,7 +101,7 @@ typedef struct s_game
 	t_img		img_walls;
 	t_img		img_space;
 	t_img		img_exit;
-	t_img		img_collect;
+	t_img		img_collect[SP_ANIM];
 }				t_game;
 
 int		exit_error(t_game *game, char *msg);
@@ -108,5 +109,7 @@ int		exit_game(t_game *game, char *msg);
 void	check_map(t_game *game);
 void	init_game(t_game *game);
 void	init_enemy(t_game *game);
+int		key_press(int keycode, t_game *game);
+int		exit_esc(t_game *game);
 
 #endif

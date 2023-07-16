@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/09 22:02:52 by luide-so          #+#    #+#              #
-#    Updated: 2023/07/15 16:43:33 by luide-so         ###   ########.fr        #
+#    Updated: 2023/07/16 01:27:59 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC = ${addprefix ${SRC_DIR}/, ${SRC_FILES}}
 
 # Bonus files
 SRC_BONUS_FILES = main_bonus.c check_map_bonus.c exit_bonus.c \
-					init_enemy_bonus.c init_game_bonus.c
+					init_enemy_bonus.c init_game_bonus.c key_press_bonus.c
 SRC_BONUS_DIR = src_bonus
 SRC_BONUS = ${addprefix ${SRC_BONUS_DIR}/, ${SRC_BONUS_FILES}}
 
@@ -41,7 +41,7 @@ LIBFT = -L Libft_obj -lft
 MINILIBX = -L mlx -lmlx -lXext -lX11
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 all: ${NAME}
 
@@ -51,7 +51,7 @@ ${NAME}: ${OBJS} ${HEADER}
 	@${CC} ${CFLAGS} ${INCLUDE} -o ${NAME} ${OBJS} ${LIBFT} ${MINILIBX}
 	@echo "\n${NAME} created"
 
-obj/%.o: ${SRC_DIR}/%.c
+obj/%.o: ${SRC_DIR}/%.c ${HEADER}
 	@mkdir -p obj
 	@${CC} ${CFLAGS} ${INCLUDE} -c $< -o $@
 	@echo "Object $(basename $(notdir $@)) files created"
