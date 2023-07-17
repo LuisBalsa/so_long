@@ -6,15 +6,31 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 17:01:20 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/16 01:43:17 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:00:59 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long_bonus.h"
 
+static void	put_tile(t_game *game)
+{
+	mlx_put_image_to_window(game->mlx, game->win,
+		game->img_p[game->player.img_index].img,
+		game->player.current.x * TILE_SIZE, game->player.current.y * TILE_SIZE);
+}
+
 static void	print_moves(t_game *game)
 {
-	ft_printf("Player moves: %d\n", ++game->moves);
+	char	*moves;
+
+	mlx_put_image_to_window(game->mlx, game->win,
+		game->img_walls.img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win,
+		game->img_walls.img, TILE_SIZE, 0);
+	mlx_string_put(game->mlx, game->win, 10, 15, 0xFF0000, "Moves:  ");
+	mlx_string_put(game->mlx, game->win, 50, 15, 0xFF0000,
+		moves = ft_itoa(game->moves));
+	free(moves);
 }
 
 static void	check_move(t_game *game, int x, int y)
@@ -34,23 +50,32 @@ static void	check_move(t_game *game, int x, int y)
 	if (game->map.grid[y][x] == ENEMY)
 		exit_game(game, "You lost the chicken fight! 🐔");
 	game->player.next = (t_point){x, y};
-//	render_move(game, x, y);
+	render_move(game, game->player.current_tile, PLAYER, &game->player);
+	game->map.grid[game->player.current.y][game->player.current.x]
+		= game->player.current_tile;
 	game->player.current = game->player.next;
-	ft_printf("Player position after: %d, %d\n", game->player.current.x,
-		game->player.current.y);
+	game->player.current_tile = game->map.grid[y][x];
+	game->map.grid[y][x] = PLAYER;
 }
 
 int	key_press(int keycode, t_game *game)
 {
-	ft_printf("Keycode: %d\n", keycode);
 	if (keycode == W || keycode == UP)
 		check_move(game, game->player.current.x, game->player.current.y - 1);
 	else if (keycode == A || keycode == LEFT)
+	{
+		game->player.img_index = 1;
+		put_tile(game);
 		check_move(game, game->player.current.x - 1, game->player.current.y);
+	}
 	else if (keycode == S || keycode == DOWN)
 		check_move(game, game->player.current.x, game->player.current.y + 1);
 	else if (keycode == D || keycode == RIGHT)
+	{
+		game->player.img_index = 0;
+		put_tile(game);
 		check_move(game, game->player.current.x + 1, game->player.current.y);
+	}
 	else if (keycode == ESC)
 		exit_game(game, "You gave up! 🐔");
 	return (0);

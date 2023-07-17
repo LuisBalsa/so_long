@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 21:02:18 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/16 01:25:39 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:38:05 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,13 @@ static void	create_map(t_game *game, char *file)
 static void	so_long(char *file)
 {
 	t_game	game;
-	int		i;
 
 	ft_bzero(&game, sizeof(t_game));
 	create_map(&game, file);
 	init_game(&game);
-	i = -1;
-	while (++i <  game.map.rows)
-		ft_printf("%s\n", game.map.grid[i]);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game);
 	mlx_hook(game.win, 17, 1L << 17, exit_esc, &game);
+	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_loop(game.mlx);
 }
 
