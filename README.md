@@ -2,6 +2,34 @@
 
 ![simplescreenrecorder-2023-04-17_15 04 52](https://user-images.githubusercontent.com/81270660/254154047-a27208df-2939-4143-9161-4e95af85c03c.gif)
 
+# Your Game Name
+
+## Introduction
+This is a game where you [provide a brief description of your game].
+
+## Installation
+To play the game, you need to follow these steps:
+
+1. Clone the repository.
+2. Navigate to the project directory.
+
+## Usage
+To compile and run the game, you have the following options:
+
+### Make
+- Run `make` to compile the game. This step is mandatory.
+- Run `make bonus` to compile the game with bonus features (if available).
+- Run `make run` to play the game. You will be prompted to choose a map
+- Run `make runall` to play all the remaining maps starting from a selected map.
+
+![simplescreenrecorder-make runall](https://user-images.githubusercontent.com/81270660/254307718-32df4169-5ee4-499d-84dc-c643aa0445c8.png)
+
+
+### Cleaning
+- Run `make clean` to remove object files.
+- Run `make fclean` to remove object files and executables.
+
+
 ## Description:
 This project is a small 2D game developed as part of the curriculum at 42 code school. The objective of the project is to work with textures, sprites, and basic gameplay elements. The game is built using the MiniLibX graphical library and requires the implementation of various features such as window management, event handling, map rendering, and character movement.
 

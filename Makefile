@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/09 22:02:52 by luide-so          #+#    #+#              #
-#    Updated: 2023/07/18 12:16:22 by luide-so         ###   ########.fr        #
+#    Updated: 2023/07/18 15:46:46 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,14 +82,39 @@ fclean: clean
 	@echo "\n${NAME} removed"
 
 run:
-	@read -p "Pick a map, options 0 to 11: " MAP_FILE; \
+	@MAP_COUNT=$$(find maps -maxdepth 1 -type f | wc -l); \
+	read -p "Pick a map, options 0 to $$(($$MAP_COUNT-1)): " MAP_FILE; \
 	if [ -x "so_long_bonus" ]; then \
-	./so_long_bonus maps/$$MAP_FILE.ber; \
+		./so_long_bonus maps/$$MAP_FILE.ber; \
 	elif [ ! -x "so_long" ]; then \
-	echo "Neither the game so_long nor so_long_bonus was found. Compile the desired game and run again."; \
+		echo "Neither the game so_long nor so_long_bonus was found. Compile the desired game and run again."; \
 	else \
-	./so_long maps/$$MAP_FILE.ber; \
+		./so_long maps/$$MAP_FILE.ber; \
 	fi
+
+runall:
+	@MAP_COUNT=$$(find maps -maxdepth 1 -type f | wc -l); \
+	read -p "Select starting map (0 to $$((MAP_COUNT-1))): " i; \
+	while [ $$i -lt $$MAP_COUNT ]; do \
+		echo "Running map $$i..."; \
+		if [ -x "so_long_bonus" ]; then \
+			output=$$(./so_long_bonus maps/$$i.ber); \
+		else \
+			output=$$(./so_long maps/$$i.ber); \
+		fi; \
+		echo "$$output" | grep -q "Congratulations! You managed to drive drunk! 🍺"; \
+		if [ $$? -eq 0 ]; then \
+			echo "\nMap $$i completed."; \
+			i=$$(($$i + 1)); \
+		fi; \
+		echo "$$output"; \
+		echo "\nStarting map $$i."; \
+		read -p "Continue? (y/n): " choice; \
+		if [ $$choice != "y" ]; then \
+			break; \
+		fi; \
+		sleep 1; \
+	done
 
 fcleansoft:
 	@${RM} ${OBJS} ${OBJS_BONUS}
