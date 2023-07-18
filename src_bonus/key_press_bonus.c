@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 17:01:20 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/17 17:00:59 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/18 03:35:16 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ static void	print_moves(t_game *game)
 		game->img_walls.img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->win,
 		game->img_walls.img, TILE_SIZE, 0);
-	mlx_string_put(game->mlx, game->win, 10, 15, 0xFF0000, "Moves:  ");
-	mlx_string_put(game->mlx, game->win, 50, 15, 0xFF0000,
-		moves = ft_itoa(game->moves));
+	mlx_string_put(game->mlx, game->win, 10, 15, 0xFFFFFF, "Moves:  ");
+	mlx_string_put(game->mlx, game->win, 50, 15, 0xFFFFFF,
+		moves = ft_itoa(++game->moves));
 	free(moves);
 }
 
 static void	check_move(t_game *game, int x, int y)
 {
+	game->player.i_anim = 1;
 	if (game->map.grid[y][x] == WALL)
 		return ;
 	print_moves(game);
@@ -64,7 +65,7 @@ int	key_press(int keycode, t_game *game)
 		check_move(game, game->player.current.x, game->player.current.y - 1);
 	else if (keycode == A || keycode == LEFT)
 	{
-		game->player.img_index = 1;
+		game->player.img_index = FACE_LEFT;
 		put_tile(game);
 		check_move(game, game->player.current.x - 1, game->player.current.y);
 	}
@@ -72,7 +73,7 @@ int	key_press(int keycode, t_game *game)
 		check_move(game, game->player.current.x, game->player.current.y + 1);
 	else if (keycode == D || keycode == RIGHT)
 	{
-		game->player.img_index = 0;
+		game->player.img_index = FACE_RIGHT;
 		put_tile(game);
 		check_move(game, game->player.current.x + 1, game->player.current.y);
 	}

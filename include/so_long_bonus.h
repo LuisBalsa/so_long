@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 21:03:17 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/17 17:18:32 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/18 03:16:50 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,27 @@
 # include <time.h>
 
 # define TILE_SIZE 32
-# define SP_LEN 2
+# define SP_LEN 4
 # define SP_ANIM 4
 # define SP_ANIM_SPEED 100000
 # define ENEMY_SPEED 250000
 # define TILLES "01CEP"
-# define SPACES_PER_ENEMY 60
-# define WALL_XPM "textures/1.xpm"
-# define SPACE_XPM "textures/0.xpm"
-# define EXIT_XPM "textures/E.xpm"
-# define COLLECT1_XPM "textures/C1.xpm"
-# define COLLECT2_XPM "textures/C2.xpm"
-# define COLLECT3_XPM "textures/C3.xpm"
-# define COLLECT4_XPM "textures/C4.xpm"
-# define PLAYER1_XPM "textures/P1.xpm"
-# define PLAYER2_XPM "textures/P2.xpm"
-# define ENEMY1_XPM "textures/X1.xpm"
-# define ENEMY2_XPM "textures/X2.xpm"
+# define SPACES_PER_ENEMY 100
+# define W_XPM "textures/1.xpm"
+# define S_XPM "textures/0.xpm"
+# define E_XPM "textures/E.xpm"
+# define C1_XPM "textures/C1.xpm"
+# define C2_XPM "textures/C2.xpm"
+# define C3_XPM "textures/C3.xpm"
+# define C4_XPM "textures/C4.xpm"
+# define P1_XPM "textures/P1.xpm"
+# define P2_XPM "textures/P2.xpm"
+# define P3_XPM "textures/P3.xpm"
+# define P4_XPM "textures/P4.xpm"
+# define E1_XPM "textures/X1.xpm"
+# define E2_XPM "textures/X2.xpm"
+# define E3_XPM "textures/X3.xpm"
+# define E4_XPM "textures/X4.xpm"
 
 typedef enum e_key
 {
@@ -60,10 +64,11 @@ typedef enum e_tile
 	ENEMY = 'X',
 }				t_tile;
 
+//Alterar para o mandatorio
 typedef enum e_img_index
 {
-	FACE_LEFT = 0,
-	FACE_RIGHT = 4,
+	FACE_LEFT = 2,
+	FACE_RIGHT = 0,
 }				t_img_index;
 
 typedef struct s_point
@@ -92,6 +97,7 @@ typedef struct s_dummies
 	char	current_tile;
 	t_point	next;
 	int		img_index;
+	int		i_anim;
 	int		collect;
 	int		direction;
 }				t_dummies;
@@ -118,6 +124,8 @@ typedef struct s_game
 	int			anim_index;
 	long		clock_anim;
 	long		clock_enemy;
+	int			x;
+	int			y;
 }				t_game;
 
 int		exit_error(t_game *game, char *msg);

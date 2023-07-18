@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 21:06:37 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/16 12:57:44 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/18 03:22:54 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,24 @@
 
 static void	free_textures(t_game *game)
 {
+	game->exit = -1;
 	if (game->img_walls.img)
 		mlx_destroy_image(game->mlx, game->img_walls.img);
 	if (game->img_space.img)
 		mlx_destroy_image(game->mlx, game->img_space.img);
 	if (game->img_exit.img)
 		mlx_destroy_image(game->mlx, game->img_exit.img);
-	if (game->img_collect[0].img)
-		mlx_destroy_image(game->mlx, game->img_collect[0].img);
-	if (game->img_collect[1].img)
-		mlx_destroy_image(game->mlx, game->img_collect[1].img);
-	if (game->img_collect[2].img)
-		mlx_destroy_image(game->mlx, game->img_collect[2].img);
-	if (game->img_collect[3].img)
-		mlx_destroy_image(game->mlx, game->img_collect[3].img);
-	if (game->img_p[0].img)
-		mlx_destroy_image(game->mlx, game->img_p[0].img);
-	if (game->img_p[1].img)
-		mlx_destroy_image(game->mlx, game->img_p[1].img);
-	if (game->img_e[0].img)
-		mlx_destroy_image(game->mlx, game->img_e[0].img);
-	if (game->img_e[1].img)
-		mlx_destroy_image(game->mlx, game->img_e[1].img);
+	while (++game->exit < SP_ANIM)
+		if (game->img_collect[game->exit].img)
+			mlx_destroy_image(game->mlx, game->img_collect[game->exit].img);
+	game->exit = -1;
+	while (++game->exit < SP_LEN)
+		if (game->img_p[game->exit].img)
+			mlx_destroy_image(game->mlx, game->img_p[game->exit].img);
+	game->exit = -1;
+	while (++game->exit < SP_LEN)
+		if (game->img_e[game->exit].img)
+			mlx_destroy_image(game->mlx, game->img_e[game->exit].img);
 }
 
 static void	free_game(t_game *game)

@@ -6,17 +6,16 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:56:34 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/17 16:05:21 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/18 03:51:36 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long_bonus.h"
 
-static void	put_tile(t_game *game, t_dummies *enemy)
+static void	put_tile(t_game *game, t_img *img, int i, t_point p)
 {
-	mlx_put_image_to_window(game->mlx, game->win,
-		game->img_e[enemy->img_index].img,
-		enemy->current.x * TILE_SIZE, enemy->current.y * TILE_SIZE);
+	mlx_put_image_to_window(game->mlx, game->win, img[i].img,
+		p.x * TILE_SIZE, p.y * TILE_SIZE);
 }
 
 static void	check_move(t_game *game, t_dummies *enemy, int x, int y)
@@ -39,20 +38,21 @@ static void	check_move(t_game *game, t_dummies *enemy, int x, int y)
 
 static void	move_enemy(t_game *game, t_dummies *enemy)
 {
+	enemy->i_anim = 1;
 	if (enemy->direction == 0)
 		check_move(game, enemy, enemy->current.x, enemy->current.y - 1);
 	else if (enemy->direction == 1)
 	{
-		enemy->img_index = 1;
-		put_tile(game, enemy);
+		enemy->img_index = FACE_LEFT;
+		put_tile(game, game->img_e, enemy->img_index, enemy->current);
 		check_move(game, enemy, enemy->current.x - 1, enemy->current.y);
 	}
 	else if (enemy->direction == 2)
 		check_move(game, enemy, enemy->current.x, enemy->current.y + 1);
 	else if (enemy->direction == 3)
 	{
-		enemy->img_index = 0;
-		put_tile(game, enemy);
+		enemy->img_index = FACE_RIGHT;
+		put_tile(game, game->img_e, enemy->img_index, enemy->current);
 		check_move(game, enemy, enemy->current.x + 1, enemy->current.y);
 	}
 }
@@ -61,24 +61,29 @@ static void	render_animation(t_game *game)
 {
 	int		i;
 	int		j;
-	int		x;
-	int		y;
 
 	i = -1;
 	while (++i < game->map.rows)
 	{
 		j = -1;
 		while (++j < game->map.cols)
-		{
 			if (game->map.grid[i][j] == COLLECT)
-			{
-				x = j * TILE_SIZE;
-				y = i * TILE_SIZE;
-				mlx_put_image_to_window(game->mlx, game->win,
-					game->img_collect[game->anim_index].img, x, y);
-			}
+				put_tile(game, game->img_collect, game->anim_index,
+					(t_point){j, i});
+	}
+	i = -1;
+	while (++i < game->enemy_count)
+	{
+		if (game->enemy[i].i_anim)
+		{
+			put_tile(game, game->img_e, game->enemy[i].img_index
+				+ (game->enemy[i].i_anim % 2), game->enemy[i].current);
+			game->enemy[i].i_anim = (game->enemy[i].i_anim + 1) % 3;
 		}
 	}
+	if (game->player.i_anim)
+		put_tile(game, game->img_p, game->player.img_index
+			+ (game->player.i_anim % 2), game->player.current);
 }
 
 int	game_loop(t_game *game)
@@ -91,6 +96,8 @@ int	game_loop(t_game *game)
 		render_animation(game);
 		game->anim_index++;
 		game->anim_index = game->anim_index % SP_ANIM;
+		if (game->player.i_anim)
+			game->player.i_anim = (game->player.i_anim + 1) % 3;
 	}
 	if (clock() - game->clock_enemy >= ENEMY_SPEED)
 	{

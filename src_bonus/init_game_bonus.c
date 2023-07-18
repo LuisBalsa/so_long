@@ -6,13 +6,13 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 14:24:21 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/16 12:52:23 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/18 03:24:51 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long_bonus.h"
 
-static void	init_map(t_game *game, int i, int j)
+static void	render_map(t_game *game, int i, int j)
 {
 	t_img	*tile;
 
@@ -45,43 +45,39 @@ static void	check_textures(t_game *game)
 		|| !game->img_collect[0].img || !game->img_collect[1].img
 		|| !game->img_collect[2].img || !game->img_collect[3].img
 		|| !game->img_p[0].img || !game->img_p[1].img
-		|| !game->img_e[0].img || !game->img_e[1].img)
+		|| !game->img_p[2].img || !game->img_p[3].img
+		|| !game->img_e[0].img || !game->img_e[1].img
+		|| !game->img_e[2].img || !game->img_e[3].img)
 		exit_error(game, "Couldn't load textures.");
 }
 
-static void	init_textures(t_game *game)
+static void	load_textures(t_game *g)
 {
-	game->img_walls.img = mlx_xpm_file_to_image(game->mlx, WALL_XPM,
-			&game->img_walls.width, &game->img_walls.height);
-	game->img_space.img = mlx_xpm_file_to_image(game->mlx, SPACE_XPM,
-			&game->img_space.width, &game->img_space.height);
-	game->img_exit.img = mlx_xpm_file_to_image(game->mlx, EXIT_XPM,
-			&game->img_exit.width, &game->img_exit.height);
-	game->img_collect[0].img = mlx_xpm_file_to_image(game->mlx, COLLECT1_XPM,
-			&game->img_collect[0].width, &game->img_collect[0].height);
-	game->img_collect[1].img = mlx_xpm_file_to_image(game->mlx, COLLECT2_XPM,
-			&game->img_collect[1].width, &game->img_collect[1].height);
-	game->img_collect[2].img = mlx_xpm_file_to_image(game->mlx, COLLECT3_XPM,
-			&game->img_collect[2].width, &game->img_collect[2].height);
-	game->img_collect[3].img = mlx_xpm_file_to_image(game->mlx, COLLECT4_XPM,
-			&game->img_collect[3].width, &game->img_collect[3].height);
-	game->img_p[0].img = mlx_xpm_file_to_image(game->mlx, PLAYER1_XPM,
-			&game->img_p[0].width, &game->img_p[0].height);
-	game->img_p[1].img = mlx_xpm_file_to_image(game->mlx, PLAYER2_XPM,
-			&game->img_p[1].width, &game->img_p[1].height);
-	game->img_e[0].img = mlx_xpm_file_to_image(game->mlx, ENEMY1_XPM,
-			&game->img_e[0].width, &game->img_e[0].height);
-	game->img_e[1].img = mlx_xpm_file_to_image(game->mlx, ENEMY2_XPM,
-			&game->img_e[1].width, &game->img_e[1].height);
-	check_textures(game);
+	g->img_walls.img = mlx_xpm_file_to_image(g->mlx, W_XPM, &g->x, &g->y);
+	g->img_space.img = mlx_xpm_file_to_image(g->mlx, S_XPM, &g->x, &g->y);
+	g->img_exit.img = mlx_xpm_file_to_image(g->mlx, E_XPM, &g->x, &g->y);
+	g->img_collect[0].img = mlx_xpm_file_to_image(g->mlx, C1_XPM, &g->x, &g->y);
+	g->img_collect[1].img = mlx_xpm_file_to_image(g->mlx, C2_XPM, &g->x, &g->y);
+	g->img_collect[2].img = mlx_xpm_file_to_image(g->mlx, C3_XPM, &g->x, &g->y);
+	g->img_collect[3].img = mlx_xpm_file_to_image(g->mlx, C4_XPM, &g->x, &g->y);
+	g->img_p[0].img = mlx_xpm_file_to_image(g->mlx, P1_XPM, &g->x, &g->y);
+	g->img_p[1].img = mlx_xpm_file_to_image(g->mlx, P2_XPM, &g->x, &g->y);
+	g->img_p[2].img = mlx_xpm_file_to_image(g->mlx, P3_XPM, &g->x, &g->y);
+	g->img_p[3].img = mlx_xpm_file_to_image(g->mlx, P4_XPM, &g->x, &g->y);
+	g->img_e[0].img = mlx_xpm_file_to_image(g->mlx, E1_XPM, &g->x, &g->y);
+	g->img_e[1].img = mlx_xpm_file_to_image(g->mlx, E2_XPM, &g->x, &g->y);
+	g->img_e[2].img = mlx_xpm_file_to_image(g->mlx, E3_XPM, &g->x, &g->y);
+	g->img_e[3].img = mlx_xpm_file_to_image(g->mlx, E4_XPM, &g->x, &g->y);
+	check_textures(g);
 }
 
 
-static void	init_mlx(t_game *game)
+static void	init_mlx_and_textures(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		exit_error(game, "Couldn't initialize mlx.");
+	load_textures(game);
 	game->win = mlx_new_window(game->mlx, game->map.cols * TILE_SIZE,
 			game->map.rows * TILE_SIZE, "so_long");
 	if (!game->win)
@@ -91,7 +87,6 @@ static void	init_mlx(t_game *game)
 void	init_game(t_game *game)
 {
 	init_enemy(game);
-	init_mlx(game);
-	init_textures(game);
-	init_map(game, -1, -1);
+	init_mlx_and_textures(game);
+	render_map(game, -1, -1);
 }
