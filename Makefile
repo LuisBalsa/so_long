@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/09 22:02:52 by luide-so          #+#    #+#              #
-#    Updated: 2023/07/18 05:55:05 by luide-so         ###   ########.fr        #
+#    Updated: 2023/07/18 12:16:22 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,16 @@ clean:
 fclean: clean
 	@${RM} ${NAME} ${NAME_BONUS}
 	@echo "\n${NAME} removed"
+
+run:
+	@read -p "Pick a map, options 0 to 11: " MAP_FILE; \
+	if [ -x "so_long_bonus" ]; then \
+	./so_long_bonus maps/$$MAP_FILE.ber; \
+	elif [ ! -x "so_long" ]; then \
+	echo "Neither the game so_long nor so_long_bonus was found. Compile the desired game and run again."; \
+	else \
+	./so_long maps/$$MAP_FILE.ber; \
+	fi
 
 fcleansoft:
 	@${RM} ${OBJS} ${OBJS_BONUS}
