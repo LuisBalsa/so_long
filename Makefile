@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/09 22:02:52 by luide-so          #+#    #+#              #
-#    Updated: 2023/07/18 15:46:46 by luide-so         ###   ########.fr        #
+#    Updated: 2023/07/18 16:27:50 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,10 @@ runall:
 			i=$$(($$i + 1)); \
 		fi; \
 		echo "$$output"; \
+		if [ $$i -ge $$MAP_COUNT ]; then \
+			echo "\nAll maps completed."; \
+			break; \
+		fi; \
 		echo "\nStarting map $$i."; \
 		read -p "Continue? (y/n): " choice; \
 		if [ $$choice != "y" ]; then \
