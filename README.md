@@ -14,8 +14,8 @@ To compile and run the game, you have the following options:
 ### Make
 - Run `make` to compile the game. This step is mandatory.
 - Run `make bonus` to compile the game with bonus features (if available).
-- Run `make run` to play the game. You will be prompted to choose a map
-- Run `make runall` to play all the remaining maps starting from a selected map.
+- Run `make run` to play the game. You will be prompted to choose a map (Just a number, it ill give you the options)
+- Run `make runall` to play all the remaining maps starting from a selected map (Just a number)
 
 ![simplescreenrecorder-make runall](https://user-images.githubusercontent.com/81270660/254307718-32df4169-5ee4-499d-84dc-c643aa0445c8.png)
 
