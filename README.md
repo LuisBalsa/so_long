@@ -2,11 +2,6 @@
 
 ![simplescreenrecorder-2023-04-17_15 04 52](https://user-images.githubusercontent.com/81270660/254154047-a27208df-2939-4143-9161-4e95af85c03c.gif)
 
-# Your Game Name
-
-## Introduction
-This is a game where you [provide a brief description of your game].
-
 ## Installation
 To play the game, you need to follow these steps:
 
