@@ -6,14 +6,14 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 21:03:17 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/18 03:16:50 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/18 06:30:53 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
 
-# include "../mlx/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../Libft/libft.h"
 # include <fcntl.h>
 # include <time.h>
@@ -24,7 +24,7 @@
 # define SP_ANIM_SPEED 100000
 # define ENEMY_SPEED 250000
 # define TILLES "01CEP"
-# define SPACES_PER_ENEMY 100
+# define SPACES_PER_ENEMY 25
 # define W_XPM "textures/1.xpm"
 # define S_XPM "textures/0.xpm"
 # define E_XPM "textures/E.xpm"

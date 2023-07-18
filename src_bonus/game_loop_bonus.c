@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:56:34 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/18 03:51:36 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/18 04:32:33 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	render_animation(t_game *game)
 					(t_point){j, i});
 	}
 	i = -1;
-	while (++i < game->enemy_count)
+	while (game->enemy[0].current.x && ++i < game->enemy_count)
 	{
 		if (game->enemy[i].i_anim)
 		{

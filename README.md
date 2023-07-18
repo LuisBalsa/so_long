@@ -1,5 +1,7 @@
 # Project Name: So Long - Unfinished
 
+![simplescreenrecorder-2023-04-17_15 04 52](https://user-images.githubusercontent.com/81270660/254154047-a27208df-2939-4143-9161-4e95af85c03c.gif)
+
 ## Description:
 This project is a small 2D game developed as part of the curriculum at 42 code school. The objective of the project is to work with textures, sprites, and basic gameplay elements. The game is built using the MiniLibX graphical library and requires the implementation of various features such as window management, event handling, map rendering, and character movement.
 

@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/09 22:02:52 by luide-so          #+#    #+#              #
-#    Updated: 2023/07/17 12:41:55 by luide-so         ###   ########.fr        #
+#    Updated: 2023/07/18 05:55:05 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,16 +39,16 @@ HEADER_BONUS = ${addprefix ${HEADER_DIR}/, ${HEADER_BONUS_FILES}}
 #
 INCLUDE = -I .
 LIBFT = -L Libft_obj -lft
-MINILIBX = -L mlx -lmlx -lXext -lX11
+MINILIBX = -L minilibx-linux -lmlx -lXext -lX11
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 all: ${NAME}
 
 ${NAME}: ${OBJS} ${HEADER}
 	@make -s -C Libft
-	@make -s -C mlx
+	@make -s -C minilibx-linux
 	@${CC} ${CFLAGS} ${INCLUDE} -o ${NAME} ${OBJS} ${LIBFT} ${MINILIBX}
 	@echo "\n${NAME} created"
 
@@ -61,7 +61,7 @@ bonus: ${NAME_BONUS}
 
 ${NAME_BONUS}: ${OBJS_BONUS} ${HEADER_BONUS}
 	@make -s -C Libft
-	@make -s -C mlx
+	@make -s -C minilibx-linux
 	@${CC} ${CFLAGS} ${INCLUDE} -o ${NAME_BONUS} ${OBJS_BONUS} ${LIBFT} ${MINILIBX}
 	@echo "\n${NAME_BONUS} created"
 
@@ -72,17 +72,29 @@ obj_bonus/%.o: ${SRC_BONUS_DIR}/%.c
 
 clean:
 	@make fclean -s -C Libft
-	@make clean -s -C mlx
+	@make clean -s -C minilibx-linux
 	@${RM} ${OBJS} ${OBJS_BONUS}
 	@${RM} -r obj obj_bonus
 	@echo "\nObject files removed"
-	@make fclean -s -C Libft
 
 fclean: clean
 	@${RM} ${NAME} ${NAME_BONUS}
 	@echo "\n${NAME} removed"
 
+fcleansoft:
+	@${RM} ${OBJS} ${OBJS_BONUS}
+	@${RM} -r obj obj_bonus
+	@echo "\nObject files removed"
+	@${RM} ${NAME} ${NAME_BONUS}
+	@echo "\n${NAME} removed"
+
+downloadminilibx:
+	@wget https://cdn.intra.42.fr/document/document/17753/minilibx-linux.tgz
+	@tar -xzf minilibx-linux.tgz
+
 re: fclean all
+
+rebsoft: fcleansoft bonus
 
 .PHONY: all clean fclean re bonus
 

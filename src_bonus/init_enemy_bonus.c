@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 15:01:55 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/17 11:34:11 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/18 05:49:25 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 static int	next_to_player(t_game *game, t_point pos)
 {
-	if (game->map.grid[pos.y][pos.x + 1] == PLAYER)
-		return (1);
-	if (game->map.grid[pos.y][pos.x - 1] == PLAYER)
-		return (1);
-	if (game->map.grid[pos.y + 1][pos.x] == PLAYER)
-		return (1);
-	if (game->map.grid[pos.y - 1][pos.x] == PLAYER)
-		return (1);
+	game->y = pos.y - 3;
+	if (game->y < 0)
+		game->y = 1;
+	while (game->y < pos.y + 6 && game->y < game->map.rows)
+	{
+		game->x = pos.x - 3;
+		if (game->x < 0)
+			game->x = 1;
+		while (game->x < pos.x + 6 && game->x < game->map.cols)
+		{
+			if (game->map.grid[game->y][game->x] == PLAYER)
+				return (1);
+			game->x++;
+		}
+		game->y++;
+	}
 	return (0);
 }
 
