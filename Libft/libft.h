@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:38:49 by luide-so          #+#    #+#             */
-/*   Updated: 2023/06/24 23:03:02 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:18:15 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int		ft_intlen(long long n, int base);
 void	ft_puthex_fd(unsigned int num, const char c, int fd);
 char	*ft_itoapositive(long long n);
 void	ft_free_array(char **array);
+void	ft_free_array_size(void **array, int size);
 
 // printf functions
 

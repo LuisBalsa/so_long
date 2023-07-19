@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:56:34 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/18 04:32:33 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:48:13 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	move_enemy(t_game *game, t_dummies *enemy)
 		check_move(game, enemy, enemy->current.x, enemy->current.y - 1);
 	else if (enemy->direction == 1)
 	{
-		enemy->img_index = FACE_LEFT;
+		enemy->img_index = FACE_LEFT + 4 * enemy->trump;
 		put_tile(game, game->img_e, enemy->img_index, enemy->current);
 		check_move(game, enemy, enemy->current.x - 1, enemy->current.y);
 	}
@@ -51,7 +51,7 @@ static void	move_enemy(t_game *game, t_dummies *enemy)
 		check_move(game, enemy, enemy->current.x, enemy->current.y + 1);
 	else if (enemy->direction == 3)
 	{
-		enemy->img_index = FACE_RIGHT;
+		enemy->img_index = FACE_RIGHT + 4 * enemy->trump;
 		put_tile(game, game->img_e, enemy->img_index, enemy->current);
 		check_move(game, enemy, enemy->current.x + 1, enemy->current.y);
 	}
@@ -99,13 +99,14 @@ int	game_loop(t_game *game)
 		if (game->player.i_anim)
 			game->player.i_anim = (game->player.i_anim + 1) % 3;
 	}
-	if (clock() - game->clock_enemy >= ENEMY_SPEED)
+	if (game->enemy[0].current.x && clock() - game->clock_enemy >= ENEMY_SPEED)
 	{
 		enemy = -1;
 		game->clock_enemy = clock();
+		eric_trump(game);
 		while (game->enemy[++enemy].current.x && (enemy < game->enemy_count))
 		{
-			if (rand() % 32 == 0)
+			if (rand() % 16 == 0)
 				game->enemy[enemy].direction = rand() % 4;
 			if (rand() % 3 - (rand() % 3))
 				move_enemy(game, &game->enemy[enemy]);

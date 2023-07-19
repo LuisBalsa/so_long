@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 21:03:17 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/18 06:30:53 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:52:22 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 
 # define TILE_SIZE 32
 # define SP_LEN 4
+# define SP_E_LEN 8
 # define SP_ANIM 4
 # define SP_ANIM_SPEED 100000
 # define ENEMY_SPEED 250000
+# define SPACES_PER_ENEMY 50
+# define TRUMP_MODE 1
+# define TRUMP_STEPS 50
 # define TILLES "01CEP"
-# define SPACES_PER_ENEMY 25
 # define W_XPM "textures/1.xpm"
 # define S_XPM "textures/0.xpm"
 # define E_XPM "textures/E.xpm"
@@ -40,6 +43,10 @@
 # define E2_XPM "textures/X2.xpm"
 # define E3_XPM "textures/X3.xpm"
 # define E4_XPM "textures/X4.xpm"
+# define E5_XPM "textures/X5.xpm"
+# define E6_XPM "textures/X6.xpm"
+# define E7_XPM "textures/X7.xpm"
+# define E8_XPM "textures/X8.xpm"
 
 typedef enum e_key
 {
@@ -64,7 +71,6 @@ typedef enum e_tile
 	ENEMY = 'X',
 }				t_tile;
 
-//Alterar para o mandatorio
 typedef enum e_img_index
 {
 	FACE_LEFT = 2,
@@ -100,6 +106,7 @@ typedef struct s_dummies
 	int		i_anim;
 	int		collect;
 	int		direction;
+	int		trump;
 }				t_dummies;
 
 typedef struct s_game
@@ -107,11 +114,13 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	t_map		map;
-	t_dummies	player;
 	int			moves;
+	t_dummies	player;
 	t_img		img_p[SP_LEN];
 	t_dummies	*enemy;
-	t_img		img_e[SP_LEN];
+	t_img		img_e[SP_E_LEN];
+	int			trump_steps;
+	int			**path_grid;
 	int			player_count;
 	int			enemy_count;
 	int			exit;
@@ -137,5 +146,6 @@ void	init_enemy(t_game *game);
 int		key_press(int keycode, t_game *game);
 void	render_move(t_game *game, char current, char next, t_dummies *dummy);
 int		game_loop(t_game *game);
+void	eric_trump(t_game *game);
 
 #endif

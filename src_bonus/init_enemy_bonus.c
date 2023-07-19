@@ -6,13 +6,29 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 15:01:55 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/18 11:47:18 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:18:50 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long_bonus.h"
 
-static int	next_to_player(t_game *game, t_point pos)
+static void	create_path_grid(t_game *game)
+{
+	int	i;
+
+	game->path_grid = ft_calloc(game->map.rows, sizeof(int *));
+	if (!game->path_grid)
+		exit_error(game, "Couldn't allocate memory.");
+	i = -1;
+	while (++i < game->map.rows)
+	{
+		game->path_grid[i] = ft_calloc(game->map.cols, sizeof(int));
+		if (!game->path_grid[i])
+			exit_error(game, "Couldn't allocate memory.");
+	}
+}
+
+static int	near_space_not_player(t_game *game, t_point pos)
 {
 	game->y = pos.y - 3;
 	game->y *= !(game->y < 0);
@@ -23,28 +39,21 @@ static int	next_to_player(t_game *game, t_point pos)
 		while (game->x < pos.x + 6 && game->x < game->map.cols)
 		{
 			if (game->map.grid[game->y][game->x] == PLAYER)
-				return (1);
+				return (0);
 			game->x++;
 		}
 		game->y++;
 	}
-	return (0);
-}
-
-static int	next_to_space(t_game *game, t_point pos)
-{
-	int	spaces;
-
-	spaces = 0;
+	game->x = 0;
 	if (game->map.grid[pos.y][pos.x + 1] == SPACE)
-		spaces++;
+		game->x++;
 	if (game->map.grid[pos.y][pos.x - 1] == SPACE)
-		spaces++;
+		game->x++;
 	if (game->map.grid[pos.y + 1][pos.x] == SPACE)
-		spaces++;
+		game->x++;
 	if (game->map.grid[pos.y - 1][pos.x] == SPACE)
-		spaces++;
-	return (spaces > 2);
+		game->x++;
+	return (game->x > 2);
 }
 
 static void	place_enemies(t_game *game)
@@ -62,8 +71,7 @@ static void	place_enemies(t_game *game)
 		j = (rand() % (game->map.cols - 1) + 1);
 		if (game->map.grid[i][j] == SPACE)
 		{
-			if (!next_to_player(game, (t_point){j, i}) &&
-				next_to_space(game, (t_point){j, i}))
+			if (near_space_not_player(game, (t_point){j, i}))
 			{
 				game->enemy[k].current = (t_point){j, i};
 				game->enemy[k].next = (t_point){j, i};
@@ -100,4 +108,5 @@ void	init_enemy(t_game *game)
 	if (!game->enemy)
 		exit_error(game, "Couldn't allocate memory.");
 	place_enemies(game);
+	create_path_grid(game);
 }

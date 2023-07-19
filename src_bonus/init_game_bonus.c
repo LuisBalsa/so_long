@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 14:24:21 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/18 03:24:51 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:27:50 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ static void	load_textures(t_game *g)
 	g->img_e[1].img = mlx_xpm_file_to_image(g->mlx, E2_XPM, &g->x, &g->y);
 	g->img_e[2].img = mlx_xpm_file_to_image(g->mlx, E3_XPM, &g->x, &g->y);
 	g->img_e[3].img = mlx_xpm_file_to_image(g->mlx, E4_XPM, &g->x, &g->y);
+	g->img_e[4].img = mlx_xpm_file_to_image(g->mlx, E5_XPM, &g->x, &g->y);
+	g->img_e[5].img = mlx_xpm_file_to_image(g->mlx, E6_XPM, &g->x, &g->y);
+	g->img_e[6].img = mlx_xpm_file_to_image(g->mlx, E7_XPM, &g->x, &g->y);
+	g->img_e[7].img = mlx_xpm_file_to_image(g->mlx, E8_XPM, &g->x, &g->y);
 	check_textures(g);
 }
 

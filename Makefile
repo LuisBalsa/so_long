@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/09 22:02:52 by luide-so          #+#    #+#              #
-#    Updated: 2023/07/18 16:27:50 by luide-so         ###   ########.fr        #
+#    Updated: 2023/07/19 17:44:46 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = ${addprefix ${SRC_DIR}/, ${SRC_FILES}}
 # Bonus files
 SRC_BONUS_FILES = main_bonus.c check_map_bonus.c exit_bonus.c \
 					init_enemy_bonus.c init_game_bonus.c key_press_bonus.c \
-					render_move_bonus.c game_loop_bonus.c
+					render_move_bonus.c game_loop_bonus.c eric_trump_bonus.c
 SRC_BONUS_DIR = src_bonus
 SRC_BONUS = ${addprefix ${SRC_BONUS_DIR}/, ${SRC_BONUS_FILES}}
 
@@ -42,7 +42,7 @@ LIBFT = -L Libft_obj -lft
 MINILIBX = -L minilibx-linux -lmlx -lXext -lX11
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 all: ${NAME}
 

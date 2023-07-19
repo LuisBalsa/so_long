@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 21:06:37 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/18 03:22:54 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:27:04 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	free_textures(t_game *game)
 		if (game->img_p[game->exit].img)
 			mlx_destroy_image(game->mlx, game->img_p[game->exit].img);
 	game->exit = -1;
-	while (++game->exit < SP_LEN)
+	while (++game->exit < SP_E_LEN)
 		if (game->img_e[game->exit].img)
 			mlx_destroy_image(game->mlx, game->img_e[game->exit].img);
 }
@@ -40,6 +40,8 @@ static void	free_game(t_game *game)
 	{
 		if (game->map.grid)
 			ft_free_array(game->map.grid);
+		if (game->path_grid)
+			ft_free_array_size((void **)game->path_grid, game->map.rows);
 		free_textures(game);
 		if (game->mlx && game->win)
 			mlx_destroy_window(game->mlx, game->win);
