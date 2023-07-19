@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 14:21:07 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/19 17:53:21 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/19 21:05:18 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,26 @@
 static void	best_direction(int **path, int *direction, t_point current)
 {
 	int	less_steps;
+	int	x;
+	int	y;
+	int	dir;
+	int	i;
 
 	less_steps = INT_MAX;
-	if (path[current.y - 1][current.x] < less_steps)
+	i = 0;
+	dir = rand() % 4;
+	while (i < 4)
 	{
-		less_steps = path[current.y - 1][current.x];
-		*direction = 0;
+		x = current.x + (dir == 3) - (dir == 1);
+		y = current.y + (dir == 2) - (dir == 0);
+		if (path[y][x] < less_steps)
+		{
+			less_steps = path[y][x];
+			*direction = dir;
+		}
+		dir = (dir + 1) % 4;
+		i++;
 	}
-	if (path[current.y][current.x - 1] < less_steps)
-	{
-		less_steps = path[current.y][current.x - 1];
-		*direction = 1;
-	}
-	if (path[current.y + 1][current.x] < less_steps)
-	{
-		less_steps = path[current.y + 1][current.x];
-		*direction = 2;
-	}
-	if (path[current.y][current.x + 1] < less_steps)
-		*direction = 3;
 }
 
 static void	best_path_grid(t_game *g, t_point c, int **path, int steps)

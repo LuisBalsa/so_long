@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 21:03:17 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/19 17:52:22 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/19 21:55:04 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 # define SP_LEN 4
 # define SP_E_LEN 8
 # define SP_ANIM 4
-# define SP_ANIM_SPEED 100000
-# define ENEMY_SPEED 250000
+# define SP_ANIM_DELAY 100000
+# define ENEMY_DELAY 200000
+# define SPEED_PER_COLLET 10000
 # define SPACES_PER_ENEMY 50
 # define TRUMP_MODE 1
 # define TRUMP_STEPS 50

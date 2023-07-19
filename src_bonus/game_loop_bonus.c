@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:56:34 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/19 17:48:13 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/19 21:55:47 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	game_loop(t_game *game)
 {
 	int	enemy;
 
-	if (clock() - game->clock_anim >= SP_ANIM_SPEED)
+	if (clock() - game->clock_anim >= SP_ANIM_DELAY)
 	{
 		game->clock_anim = clock();
 		render_animation(game);
@@ -99,10 +99,10 @@ int	game_loop(t_game *game)
 		if (game->player.i_anim)
 			game->player.i_anim = (game->player.i_anim + 1) % 3;
 	}
-	if (game->enemy[0].current.x && clock() - game->clock_enemy >= ENEMY_SPEED)
+	if (game->enemy[0].current.x && clock() - game->clock_enemy >= ENEMY_DELAY)
 	{
 		enemy = -1;
-		game->clock_enemy = clock();
+		game->clock_enemy = clock() + game->collect * SPEED_PER_COLLET;
 		eric_trump(game);
 		while (game->enemy[++enemy].current.x && (enemy < game->enemy_count))
 		{

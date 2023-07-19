@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 14:24:21 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/19 16:27:50 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/19 21:35:36 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	render_map(t_game *game, int i, int j)
 {
 	t_img	*tile;
 
+	tile = &game->img_walls;
 	while (++i < game->map.rows)
 	{
 		j = -1;

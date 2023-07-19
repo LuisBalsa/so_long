@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/09 22:02:52 by luide-so          #+#    #+#              #
-#    Updated: 2023/07/19 17:44:46 by luide-so         ###   ########.fr        #
+#    Updated: 2023/07/19 21:38:35 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ LIBFT = -L Libft_obj -lft
 MINILIBX = -L minilibx-linux -lmlx -lXext -lX11
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-O3 #-g -fsanitize=address
 
 all: ${NAME}
 
