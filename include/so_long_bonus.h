@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 21:03:17 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/19 21:55:04 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/20 04:10:32 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <time.h>
 
 # define TILE_SIZE 32
-# define SP_LEN 4
+# define SP_LEN 6
 # define SP_E_LEN 8
 # define SP_ANIM 4
 # define SP_ANIM_DELAY 100000
@@ -40,6 +40,8 @@
 # define P2_XPM "textures/P2.xpm"
 # define P3_XPM "textures/P3.xpm"
 # define P4_XPM "textures/P4.xpm"
+# define P5_XPM "textures/P5.xpm"
+# define P6_XPM "textures/P6.xpm"
 # define E1_XPM "textures/X1.xpm"
 # define E2_XPM "textures/X2.xpm"
 # define E3_XPM "textures/X3.xpm"
@@ -117,6 +119,8 @@ typedef struct s_game
 	t_map		map;
 	int			moves;
 	t_dummies	player;
+	int			flash_mode;
+	int			clock_flash;
 	t_img		img_p[SP_LEN];
 	t_dummies	*enemy;
 	t_img		img_e[SP_E_LEN];

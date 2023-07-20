@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:56:34 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/19 21:55:47 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/20 05:08:49 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	game_loop(t_game *game)
 		eric_trump(game);
 		while (game->enemy[++enemy].current.x && (enemy < game->enemy_count))
 		{
-			if (rand() % 16 == 0)
+			if (rand() % (16 - 10 * game->enemy[enemy].trump) == 0)
 				game->enemy[enemy].direction = rand() % 4;
 			if (rand() % 3 - (rand() % 3))
 				move_enemy(game, &game->enemy[enemy]);

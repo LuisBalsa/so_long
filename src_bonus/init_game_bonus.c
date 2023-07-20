@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 14:24:21 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/19 21:35:36 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/20 04:10:55 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ static void	check_textures(t_game *game)
 		|| !game->img_p[0].img || !game->img_p[1].img
 		|| !game->img_p[2].img || !game->img_p[3].img
 		|| !game->img_e[0].img || !game->img_e[1].img
-		|| !game->img_e[2].img || !game->img_e[3].img)
+		|| !game->img_e[2].img || !game->img_e[3].img
+		|| !game->img_e[4].img || !game->img_e[5].img
+		|| !game->img_e[6].img || !game->img_e[7].img)
 		exit_error(game, "Couldn't load textures.");
 }
 
@@ -65,6 +67,8 @@ static void	load_textures(t_game *g)
 	g->img_p[1].img = mlx_xpm_file_to_image(g->mlx, P2_XPM, &g->x, &g->y);
 	g->img_p[2].img = mlx_xpm_file_to_image(g->mlx, P3_XPM, &g->x, &g->y);
 	g->img_p[3].img = mlx_xpm_file_to_image(g->mlx, P4_XPM, &g->x, &g->y);
+	g->img_p[4].img = mlx_xpm_file_to_image(g->mlx, P5_XPM, &g->x, &g->y);
+	g->img_p[5].img = mlx_xpm_file_to_image(g->mlx, P6_XPM, &g->x, &g->y);
 	g->img_e[0].img = mlx_xpm_file_to_image(g->mlx, E1_XPM, &g->x, &g->y);
 	g->img_e[1].img = mlx_xpm_file_to_image(g->mlx, E2_XPM, &g->x, &g->y);
 	g->img_e[2].img = mlx_xpm_file_to_image(g->mlx, E3_XPM, &g->x, &g->y);
