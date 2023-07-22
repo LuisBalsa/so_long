@@ -1,6 +1,6 @@
 # Project Name: So Long - Unfinished
 
-![simplescreenrecorder-2023-04-17_15 04 52](https://user-images.githubusercontent.com/81270660/254154047-a27208df-2939-4143-9161-4e95af85c03c.gif)
+![simplescreenrecorder-game-play](https://user-images.githubusercontent.com/81270660/255337185-03cbcf88-f751-4345-848d-af5c3c3383fe.gif)
 
 ## Installation
 To play the game, you need to follow these steps:
