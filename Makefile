@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/09 22:02:52 by luide-so          #+#    #+#              #
-#    Updated: 2023/07/20 04:54:32 by luide-so         ###   ########.fr        #
+#    Updated: 2023/07/22 13:29:26 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = so_long
 NAME_BONUS = so_long_bonus
 
 # Mandatory files
-SRC_FILES = main.c utils.c check_map.c
+SRC_FILES = main.c check_map.c exit.c init_game.c key_press.c \
+			render_move.c
 SRC_DIR = src
 SRC = ${addprefix ${SRC_DIR}/, ${SRC_FILES}}
 
