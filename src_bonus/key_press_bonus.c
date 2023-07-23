@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 17:01:20 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/20 04:18:24 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/23 14:26:37 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	print_moves(t_game *game)
 		game->img_walls.img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->win,
 		game->img_walls.img, TILE_SIZE, 0);
-	mlx_string_put(game->mlx, game->win, 10, 15, 0xFFFFFF, "Moves:  ");
-	mlx_string_put(game->mlx, game->win, 50, 15, 0xFFFFFF,
+	mlx_string_put(game->mlx, game->win, 7, 15, 0xFFFFFF, "Moves:  ");
+	mlx_string_put(game->mlx, game->win, 47, 15, 0xFFFFFF,
 		moves = ft_itoa(++game->moves));
 	free(moves);
 }
