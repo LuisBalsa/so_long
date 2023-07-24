@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:38:49 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/19 15:18:15 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:42:32 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int		print_pointer(unsigned long long addr, int *flags);
 // get_next_line functions
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 
 # ifndef MAX_FILES
