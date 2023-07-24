@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 14:21:07 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/20 23:46:36 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/24 10:07:00 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,3 @@ void	eric_trump(t_game *game)
 	if (game->trump_steps == TRUMP_STEPS)
 		joe_biden(game);
 }
-

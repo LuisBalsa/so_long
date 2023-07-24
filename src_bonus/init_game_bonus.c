@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 14:24:21 by luide-so          #+#    #+#             */
-/*   Updated: 2023/07/20 04:10:55 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/07/24 10:06:41 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static void	load_textures(t_game *g)
 	g->img_e[7].img = mlx_xpm_file_to_image(g->mlx, E8_XPM, &g->x, &g->y);
 	check_textures(g);
 }
-
 
 static void	init_mlx_and_textures(t_game *game)
 {
