@@ -1,4 +1,4 @@
-# Project Name: So Long - Peter Griffin VS Ernie the Giant Chicken - Unfinished
+# Project Name: So Long - Peter Griffin VS Ernie the Giant Chicken
 
 ![simplescreenrecorder-peter-vs-ernie](https://user-images.githubusercontent.com/81270660/255337939-4fd93f3b-e2e3-4960-b303-a48aead948b5.png)
 
